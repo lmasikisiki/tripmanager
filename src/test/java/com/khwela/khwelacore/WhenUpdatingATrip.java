@@ -16,8 +16,8 @@ public class WhenUpdatingATrip {
     public void ShouldRaiseTripUpdateEvent(){
         fixture =  new AggregateTestFixture<>(Trip.class);
         fixture.givenNoPriorActivity()
-        .when(new TripUpdatedCommand("123","Lizo","Durban","Flagstaff"))
-        .expectEvents(new TripUpdatedEvent("123","Lizo","Durban","Flagstaff"));
+        .when(new TripUpdatedCommand("234","123","Lizo","Durban","Flagstaff"))
+        .expectEvents(new TripUpdatedEvent("234","123","Lizo","Durban","Flagstaff"));
     }
 
 }

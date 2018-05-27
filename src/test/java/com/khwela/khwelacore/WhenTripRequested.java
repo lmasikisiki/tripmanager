@@ -22,7 +22,7 @@ public class WhenTripRequested {
 
         Date tripDate = new Date();
         fixture.givenNoPriorActivity()
-                .when(new TripRequestedCommand("Userid","From","Destination",tripDate))
-                .expectEvents(new TripRequestedEvent("Userid","From","Destination",tripDate));
+                .when(new TripRequestedCommand("124","Userid","From","Destination",tripDate))
+                .expectEvents(new TripRequestedEvent("124","Userid","From","Destination",tripDate));
     }
 }

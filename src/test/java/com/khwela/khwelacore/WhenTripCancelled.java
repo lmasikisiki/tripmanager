@@ -19,8 +19,8 @@ public class WhenTripCancelled {
     public void shouldlRaiseTripCancelledEvent(){
         fixture= new AggregateTestFixture<Trip>(Trip.class);
         fixture.givenNoPriorActivity()
-                .when(new TripCancelledCommand("123","cancelledBy"))
-                .expectEvents(new TripCancelledEvent("123","cancelledBy"),
-                        new TripStatusChangedEvent("123",TripStatus.AVAILABLE, TripStatus.CANCELLED));
+                .when(new TripCancelledCommand("234","123","cancelledBy"))
+                .expectEvents(new TripCancelledEvent("234","123","cancelledBy"),
+                        new TripStatusChangedEvent("234","123",TripStatus.AVAILABLE, TripStatus.CANCELLED));
     }
 }

@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.axonframework.test.aggregate.AggregateTestFixture;
 
+import java.util.Date;
+
 @SpringBootTest
 public class WhenTripOffered {
 
@@ -18,8 +20,8 @@ public class WhenTripOffered {
         fixture = new AggregateTestFixture<Trip>(Trip.class);
 
         fixture.givenNoPriorActivity()
-                .when(new TripOfferedCommand("123","Lizo","Durban","Flagstaff"))
-                .expectEvents(new TripOfferedEvent("123","Lizo","Durban","Flagstaff"));
+                .when(new TripOfferedCommand("234","123","Lizo","Durban","Flagstaff",3, new Date()))
+                .expectEvents(new TripOfferedEvent("234","123","Lizo","Durban","Flagstaff",3, new Date()));
 
     }
 }
