@@ -3,6 +3,7 @@ package com.khwela.khwelacore.commons;
 import com.khwela.khwelacore.models.TripRecord;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,8 +16,8 @@ public class CommonUtilities {
         return tripRecord;
     }
 
-    public static Boolean travelOnSameDay(Date userTripDate, Date driverTripDate){
-        SimpleDateFormat fmt= new SimpleDateFormat("YYYY/MM/dd");
-        return fmt.format(userTripDate).equals(fmt.format(driverTripDate));
+    public static Boolean travelOnSameDay(LocalDate userTripDate, LocalDate driverTripDate) {
+        return userTripDate.getMonth().equals(driverTripDate.getMonth()) &&
+                userTripDate.getDayOfMonth() == driverTripDate.getDayOfMonth();
     }
 }

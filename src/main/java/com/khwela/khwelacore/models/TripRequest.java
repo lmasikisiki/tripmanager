@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -18,10 +19,10 @@ public class TripRequest implements Serializable {
     private String userId;
     private  String pickup;
     private String destination;
-    private Date tripDate;
+    private LocalDate tripDate;
     private TripRequestStatus status;
 
-    public TripRequest(String userId, String pickup, String destination, Date tripDate) {
+    public TripRequest(String userId, String pickup, String destination, LocalDate tripDate) {
         this.userId = userId;
         this.pickup = pickup;
         this.destination = destination;
@@ -64,11 +65,11 @@ public class TripRequest implements Serializable {
         this.destination = destination;
     }
 
-    public Date getTripDate() {
+    public LocalDate getTripDate() {
         return tripDate;
     }
 
-    public void setTripDate(Date tripDate) {
+    public void setTripDate(LocalDate tripDate) {
         this.tripDate = tripDate;
     }
 

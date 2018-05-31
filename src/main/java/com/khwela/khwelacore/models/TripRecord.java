@@ -4,8 +4,8 @@ import com.khwela.khwelacore.enums.TripStatus;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Entity
 public class TripRecord {
@@ -18,8 +18,8 @@ public class TripRecord {
     private TripStatus status;
     private ArrayList users = new ArrayList();
     private int numberOfSeats;
-    private Date tripDate;
-    public TripRecord(String tripId, String offeredBy, String pickup, String destination,Date tripDate) {
+    private LocalDate tripDate;
+    public TripRecord(String tripId, String offeredBy, String pickup, String destination,LocalDate tripDate) {
         this.id= tripId;
         this.offeredBy=offeredBy;
         this.pickup=pickup;
@@ -28,7 +28,7 @@ public class TripRecord {
         this.tripDate=tripDate;
     }
 
-    public TripRecord(String tripId,String offeredBy, String pickup, String destination, int numberOfSeats, Date tripDate) {
+    public TripRecord(String tripId,String offeredBy, String pickup, String destination, int numberOfSeats, LocalDate tripDate) {
         this.id= tripId;
         this.offeredBy = offeredBy;
         this.pickup = pickup;
@@ -108,11 +108,11 @@ public class TripRecord {
         this.numberOfSeats = numberOfSeats;
     }
 
-    public Date getTripDate() {
+    public LocalDate getTripDate() {
         return tripDate;
     }
 
-    public void setTripDate(Date tripDate) {
+    public void setTripDate(LocalDate tripDate) {
         this.tripDate = tripDate;
     }
 

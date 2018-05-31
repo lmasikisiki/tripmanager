@@ -1,73 +1,56 @@
 package com.khwela.khwelacore.rest;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.khwela.khwelacore.commands.OfferTripCommand;
+import com.khwela.khwelacore.commons.DateDeSerializerAdaper;
+import com.khwela.khwelacore.commons.DateSerializerAdaper;
 import com.khwela.khwelacore.models.TripRecord;
-import com.khwela.khwelacore.models.TripRequest;
 import com.khwela.khwelacore.repositories.TripRepository;
 import com.khwela.khwelacore.repositories.TripRequestRepository;
-import com.khwela.khwelacore.trips.TripCancelledCommand;
-import com.khwela.khwelacore.trips.TripOfferedCommand;
-import com.khwela.khwelacore.trips.TripRequestedCommand;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
+@SuppressWarnings("unused")
 public class HomeController {
 
     private final CommandGateway commandGateway;
     private final TripRequestRepository tripRequestRepository;
     private final TripRepository tripRepository;
 
-    public HomeController(CommandGateway commandGateway, TripRepository tripRepository, TripRequestRepository tripRequestRepository){
+    private final Gson jsonConverter;
+
+    public HomeController(CommandGateway commandGateway, TripRepository tripRepository, TripRequestRepository tripRequestRepository, Gson jsonConverter) {
         this.commandGateway = commandGateway;
         this.tripRepository = tripRepository;
-        this.tripRequestRepository  =  tripRequestRepository;
+        this.tripRequestRepository = tripRequestRepository;
+       this.jsonConverter= jsonConverter;
     }
 
-
-
-    @PostMapping("/trip/offer")
-    public String offerTrip(@RequestBody @ModelAttribute TripRecord tripRecord){
-
-         return tripRecord.toString();
+    @PostMapping("/trip")
+    public CompletableFuture<Object> offerTrip(@RequestBody String requestBody) {
+        Assert.hasLength(requestBody, "supplied request body is empty");
+        OfferTripCommand tripOffer = jsonConverter.fromJson(requestBody, OfferTripCommand.class);
+        tripOffer.setTripId(UUID.randomUUID().toString());
+        return commandGateway.send(tripOffer);
     }
 
-    @GetMapping("/home")
-    public  String Home(){
-        String id= UUID.randomUUID().toString();
-        commandGateway.send(new TripOfferedCommand(id,UUID.randomUUID().toString(),"Lizo","Flagstaff","Durban",3, new Date()));
-        return "Hello World";
+    @GetMapping("/trip")
+    public List<TripRecord> getTrips() {
+        return tripRepository.findAll();
     }
 
-    //Make it post
-    @GetMapping("/cancel/{id}")
-    public CompletableFuture<Object> update(@PathVariable(name = "id") String id){
-        String ids= UUID.randomUUID().toString();
-        return commandGateway.send(new TripCancelledCommand(ids,"",""));
+    @GetMapping("/trip/{tripId}")
+    public Optional<TripRecord> getTrips(@PathVariable(name = "tripId") String tripId) {
+        return tripRepository.findById(tripId);
     }
-
-    @GetMapping("/new")
-    public CompletableFuture<Object> makerequest(){
-        String id= UUID.randomUUID().toString();
-        return commandGateway.send(new TripRequestedCommand(id,"aa","ss", "ss",new Date()));
-     }
-
-    @GetMapping("/request")
-    public List<TripRequest> requests(){
-        return tripRequestRepository.findAll();
-
-    }
-
-
-
-    @GetMapping("/list")
-    public List<TripRecord> get(){
-        return  this.tripRepository.findAll();
-    }
-
 }
