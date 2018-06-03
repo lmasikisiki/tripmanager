@@ -2,10 +2,7 @@ package com.khwela.khwelacore.rest;
 
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.khwela.khwelacore.commands.OfferTripCommand;
-import com.khwela.khwelacore.commons.DateDeSerializerAdaper;
-import com.khwela.khwelacore.commons.DateSerializerAdaper;
 import com.khwela.khwelacore.models.TripRecord;
 import com.khwela.khwelacore.repositories.TripRepository;
 import com.khwela.khwelacore.repositories.TripRequestRepository;
@@ -13,7 +10,6 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
