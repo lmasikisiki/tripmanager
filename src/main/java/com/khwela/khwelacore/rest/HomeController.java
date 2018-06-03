@@ -21,7 +21,7 @@ import java.util.concurrent.CompletableFuture;
 
 @RestController
 @SuppressWarnings("unused")
-public class HomeController {
+public class HomeController  {
 
     private final CommandGateway commandGateway;
     private final TripRequestRepository tripRequestRepository;

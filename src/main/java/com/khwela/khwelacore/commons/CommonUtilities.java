@@ -17,7 +17,7 @@ public class CommonUtilities {
     }
 
     public static Boolean travelOnSameDay(LocalDate userTripDate, LocalDate driverTripDate) {
-        return userTripDate.getMonth().equals(driverTripDate.getMonth()) &&
+         return userTripDate.getMonth().equals(driverTripDate.getMonth()) &&
                 userTripDate.getDayOfMonth() == driverTripDate.getDayOfMonth();
     }
 }

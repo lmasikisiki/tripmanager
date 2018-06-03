@@ -3,41 +3,38 @@ package com.khwela.khwelacore.models;
 import com.khwela.khwelacore.enums.TripRequestStatus;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class TripRequest implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+     private String id;
     private String userId;
     private  String pickup;
     private String destination;
     private LocalDate tripDate;
     private TripRequestStatus status;
-
-    public TripRequest(String userId, String pickup, String destination, LocalDate tripDate) {
+    private int numberOfPeople;
+    public TripRequest(String userId, String pickup, String destination, LocalDate tripDate,int numberOfPeople) {
         this.userId = userId;
         this.pickup = pickup;
         this.destination = destination;
         this.tripDate = tripDate;
         this.status = status;
         this.status= TripRequestStatus.OPEN;
+        this.numberOfPeople= numberOfPeople;
     }
 
     public TripRequest(){}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -79,5 +76,13 @@ public class TripRequest implements Serializable {
 
     public void setStatus(TripRequestStatus status) {
         this.status = status;
+    }
+
+    public int getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(int numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
     }
 }

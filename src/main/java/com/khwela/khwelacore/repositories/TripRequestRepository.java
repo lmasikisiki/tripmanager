@@ -8,11 +8,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+
 @Repository
-public interface TripRequestRepository extends JpaRepository<TripRequest, Integer> {
+public interface TripRequestRepository extends JpaRepository<TripRequest, String> {
 
     @Query("UPDATE TripRequest t SET t.status = :status WHERE t.id = :id")
     @Modifying
-    void UpdateTripRequestStatus(@Param("id") int tripRequestId, @Param("status") TripRequestStatus newStatus);
+    int UpdateTripRequestStatus(@Param("id") String tripRequestId, @Param("status") TripRequestStatus newStatus);
+
+    @Query("SELECT t FROM TripRequest t WHERE t.status =:status")
+    Collection<TripRequest> getRequestsWithStatus(@Param("status") TripRequestStatus status);
 
 }

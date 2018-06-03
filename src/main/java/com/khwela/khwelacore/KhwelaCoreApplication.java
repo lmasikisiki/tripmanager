@@ -17,12 +17,6 @@ import java.time.LocalDate;
 @EntityScan(basePackages = "com.khwela.khwelacore")
 public class KhwelaCoreApplication {
 
-	//@Bean
-	public ServletRegistrationBean servletRegistration(){
-		ServletRegistrationBean registration = new ServletRegistrationBean();
-		registration.addUrlMappings("/console/*");
-		return  registration;
-	}
     public static void main(String[] args) {
 		SpringApplication.run(KhwelaCoreApplication.class, args);
 	}

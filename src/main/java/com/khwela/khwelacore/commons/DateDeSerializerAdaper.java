@@ -12,10 +12,6 @@ public class DateDeSerializerAdaper implements JsonDeserializer {
 
     @Override
     public LocalDate deserialize(JsonElement json, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-        System.out.println("\n \n Deserialize "+json.getAsJsonPrimitive());
-
-        System.out.println("\n \n as json "+LocalDate.parse(json.getAsString()));
-
         return LocalDate.parse(json.getAsString());
     }
 }

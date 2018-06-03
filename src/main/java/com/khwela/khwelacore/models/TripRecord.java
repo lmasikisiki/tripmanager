@@ -45,7 +45,7 @@ public class TripRecord {
                 ", offeredBy='" + offeredBy + '\'' +
                 ", pickup='" + pickup + '\'' +
                 ", destination='" + destination + '\'' +
-                ", status=" + status +
+                ", TripRequestStatus=" + status +
                 ", users=" + users +
                 ", numberOfSeats=" + numberOfSeats +
                 ", tripDate=" + tripDate +
