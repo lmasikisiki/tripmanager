@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.khwela.khwelacore.commands.RequestTripCommand;
 import com.khwela.khwelacore.commons.DateDeSerializerAdaper;
 import com.khwela.khwelacore.commons.DateSerializerAdaper;
+import com.khwela.khwelacore.models.TripRecord;
 import com.khwela.khwelacore.models.TripRequest;
 import com.khwela.khwelacore.repositories.TripRepository;
 import com.khwela.khwelacore.repositories.TripRequestRepository;
@@ -49,6 +50,4 @@ import java.util.concurrent.CompletableFuture;
     public List<TripRequest> requestTrip() {
        return tripRequestRepository.findAll();
     }
-
-
 }

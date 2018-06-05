@@ -18,6 +18,6 @@ interface TripRepository : JpaRepository<TripRecord, String> {
     @Query("SELECT t FROM TripRecord t WHERE t.status =:status")
     fun getTripsWithStatus(@Param("status") newStatus: TripStatus): Collection<TripRecord>
 
-    @Query("SELECT t FROM TripRecord t WHERE t.status = :status  AND :parts")
-    fun getAvailableTrips(@Param("parts") queryParts: String, @Param("status") status: TripStatus = TripStatus.AVAILABLE):Collection<TripRecord>
+    //@Query("SELECT t FROM TripRecord t WHERE t.status = :status  AND :parts")
+   // fun getAvailableTrips(@Param("parts") queryParts: String, @Param("status") status: TripStatus = TripStatus.AVAILABLE):Collection<TripRecord>
 }

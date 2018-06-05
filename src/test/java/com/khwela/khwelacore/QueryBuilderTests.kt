@@ -15,7 +15,7 @@ class QueryBuilderTests {
         var filters = HashMap<String, Any>()
         filters["destination"] = "Point A"
         var result = getQueryParts(filters)
-        assertThat(result, contains("destination = Point A"))
+        assertThat(result, contains("a.destination = Point A"))
 
     }
 
@@ -25,20 +25,20 @@ class QueryBuilderTests {
         filters["destination"] = "Point A"
         filters["numberOfSeats"] = 3;
         var result = getQueryParts(filters)
-        assertThat(result, containsInAnyOrder("destination = Point A", "numberOfSeats = 3"))
+        assertThat(result, containsInAnyOrder("a.destination = Point A", "a.numberOfSeats = 3"))
     }
 
     @Test
     fun Given_OnlyDestinationAndTripDateandNumberOfSeats_ShouldReturn_Only3Parts() {
         val localDate = LocalDate.now();
-        var filters = HashMap<String, Any>();
-        filters["destination"] = "Point A";
-        filters["numberOfSeats"] = 3;
-        filters["tripDate"] = localDate;
+        var filters = HashMap<String, Any>()
+        filters["destination"] = "Point A"
+        filters["numberOfSeats"] = 3
+        filters["tripDate"] = localDate
         var result = getQueryParts(filters)
-        assertThat(result, containsInAnyOrder("destination = Point A",
-                "numberOfSeats = 3",
-                "tripDate = $localDate"))
+        assertThat(result, containsInAnyOrder("a.destination = Point A",
+                "a.numberOfSeats = 3",
+                "a.tripDate = $localDate"))
     }
 }
 

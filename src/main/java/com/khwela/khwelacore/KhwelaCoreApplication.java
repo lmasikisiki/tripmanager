@@ -4,12 +4,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.khwela.khwelacore.commons.DateDeSerializerAdaper;
 import com.khwela.khwelacore.commons.DateSerializerAdaper;
+import org.axonframework.common.jpa.ContainerManagedEntityManagerProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.servlet.ServletRegistration;
 import java.time.LocalDate;
 
@@ -17,8 +21,12 @@ import java.time.LocalDate;
 @EntityScan(basePackages = "com.khwela.khwelacore")
 public class KhwelaCoreApplication {
 
+
+
     public static void main(String[] args) {
+
 		SpringApplication.run(KhwelaCoreApplication.class, args);
+
 	}
 
 
@@ -29,4 +37,8 @@ public class KhwelaCoreApplication {
 	 builder.registerTypeAdapter(LocalDate.class, new DateDeSerializerAdaper());
 		return builder.create();
  	 }
+
+ 	 public EntityManager entityManager(){
+    	return new ContainerManagedEntityManagerProvider().getEntityManager();
+	 }
 }
