@@ -21,24 +21,19 @@ import java.time.LocalDate;
 @EntityScan(basePackages = "com.khwela.khwelacore")
 public class KhwelaCoreApplication {
 
-
-
     public static void main(String[] args) {
+        SpringApplication.run(KhwelaCoreApplication.class, args);
+    }
 
-		SpringApplication.run(KhwelaCoreApplication.class, args);
+    @Bean
+    public Gson jsonConverter() {
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(LocalDate.class, new DateSerializerAdaper());
+        builder.registerTypeAdapter(LocalDate.class, new DateDeSerializerAdaper());
+        return builder.create();
+    }
 
-	}
-
-
-	@Bean
-	 	public Gson jsonConverter(){
-		GsonBuilder builder = new GsonBuilder();
-		//builder.registerTypeAdapter(LocalDate.class, new DateSerializerAdaper());
-	 builder.registerTypeAdapter(LocalDate.class, new DateDeSerializerAdaper());
-		return builder.create();
- 	 }
-
- 	 public EntityManager entityManager(){
-    	return new ContainerManagedEntityManagerProvider().getEntityManager();
-	 }
+    public EntityManager entityManager() {
+        return new ContainerManagedEntityManagerProvider().getEntityManager();
+    }
 }

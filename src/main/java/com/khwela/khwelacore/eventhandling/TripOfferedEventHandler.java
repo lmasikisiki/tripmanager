@@ -23,8 +23,7 @@ public class TripOfferedEventHandler {
 
     @EventHandler
     public void on(TripOfferedEvent event) throws Exception {
-        System.out.println("attempt assigment");
-        this.requestService.attemptAssignment();
+         this.requestService.attemptAssignment();
     }
 
 }

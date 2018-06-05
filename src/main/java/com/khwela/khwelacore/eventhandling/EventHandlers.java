@@ -19,26 +19,4 @@ public class EventHandlers {
         this.tripRepository = tripRepository;
         this.eventBus = eventBus;
     }
-
-
-/*
-
-    @EventHandler
-    public void onE(TripRequestStatusChangedEvent event) {
-        tripRequestRepository.UpdateTripRequestStatus(event.getRequestId(), event.getNewStaus());
-    }
-
-    @EventHandler
-    public void on(TripStatusChangedEvent event) {
-        tripRepository.UpdateTripStatus(event.getTripId(), TripStatus.CANCELLED);
-    }
-
-    @EventHandler
-    public void onE(UserNotifiedOfCancellationEvent event) {
-        System.out.println("Good job, User has been notified of the cancellation...");
-    }
-*/
-
-
-
-}
+ }

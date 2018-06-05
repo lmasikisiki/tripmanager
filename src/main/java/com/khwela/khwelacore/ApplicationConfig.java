@@ -27,13 +27,10 @@ import java.sql.SQLException;
         })
 public class ApplicationConfig {
 
-    
-
-//   @Bean
-   public EventStorageEngine eventStores() throws SQLException {
+    //@Bean
+   public EventStorageEngine eventStores() {
        return new InMemoryEventStorageEngine();
-     //  new JdbcEventStorageEngine()
-    }
+     }
 
     @Bean
    public EntityManagerProvider entityManagerProvider(){
@@ -54,10 +51,7 @@ public class ApplicationConfig {
 
     @Bean(name="transactionManager")
     public PlatformTransactionManager dbTransactionManager() {
-        JpaTransactionManager transactionManager
-                = new JpaTransactionManager();
-      /*  transactionManager.setEntityManagerFactory(
-                dbEntityManager().getObject());*/
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
         return transactionManager;
     }
 
@@ -70,6 +64,4 @@ public class ApplicationConfig {
     public JpaEventStorageEngine jpaEventStorageEngine(){
        return new JpaEventStorageEngine(entityManagerProvider(),springTransactionManager());
     }
-
-
 }

@@ -11,24 +11,25 @@ import java.time.LocalDate;
 public class TripRequest implements Serializable {
 
     @Id
-     private String id;
+    private String id;
     private String userId;
-    private  String pickup;
+    private String pickup;
     private String destination;
     private LocalDate tripDate;
     private TripRequestStatus status;
     private int numberOfPeople;
-    public TripRequest(String userId, String pickup, String destination, LocalDate tripDate,int numberOfPeople) {
+
+    public TripRequest(String userId, String pickup, String destination, LocalDate tripDate, int numberOfPeople) {
         this.userId = userId;
         this.pickup = pickup;
         this.destination = destination;
         this.tripDate = tripDate;
-        this.status = status;
-        this.status= TripRequestStatus.OPEN;
-        this.numberOfPeople= numberOfPeople;
+        this.status = TripRequestStatus.OPEN;
+        this.numberOfPeople = numberOfPeople;
     }
 
-    public TripRequest(){}
+    public TripRequest() {
+    }
 
     public String getId() {
         return id;

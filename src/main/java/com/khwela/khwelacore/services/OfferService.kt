@@ -16,9 +16,8 @@ class OfferService(private  val tripRepository: TripRepository, private val even
 
     fun getAvailableTrips(filter : Map<String, Any>):List<TripRecord>{
        var queryparts = QueryBuilder.getQueryParts(filter).joinToString(" AND ")
-        print("SELECT a FROM TripRecord a WHERE $queryparts");
-       return em.createQuery("SELECT a FROM TripRecord a WHERE $queryparts").resultList
-               as List<TripRecord>;
+        return em.createQuery("SELECT a FROM TripRecord a WHERE $queryparts").resultList
+               as List<TripRecord>
      }
 
 }
