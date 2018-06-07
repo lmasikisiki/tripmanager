@@ -2,7 +2,7 @@ package com.khwela.khwelacore.eventhandling
 
 import com.khwela.khwelacore.services.RequestService
 import com.khwela.khwelacore.enums.TripRequestStatus.ASSIGNED
-import com.khwela.khwelacore.events.RequestStatusUpatedEvent
+import com.khwela.khwelacore.events.RequestStatusUpdatedEvent
 import com.khwela.khwelacore.events.TripRequestAssignedEvent
 import com.khwela.khwelacore.events.TripRequestedEvent
 import org.axonframework.eventhandling.EventBus
@@ -18,7 +18,7 @@ class TripRequestedEventHandler(private val requestService: RequestService, priv
     fun on(event: TripRequestAssignedEvent) {
         var updateStatus = requestService.updateRequestStatus(event.requestId, ASSIGNED)
         if (updateStatus > 0) {
-            var requestStatusUpatedEvent = asEventMessage<RequestStatusUpatedEvent>(RequestStatusUpatedEvent(event.requestId, ASSIGNED))
+            var requestStatusUpatedEvent = asEventMessage<RequestStatusUpdatedEvent>(RequestStatusUpdatedEvent(event.requestId, ASSIGNED))
             this.eventBus.publish(requestStatusUpatedEvent)
         }
     }

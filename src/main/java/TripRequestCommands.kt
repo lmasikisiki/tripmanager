@@ -16,3 +16,13 @@ class RequestTripCommand(var tripRequestId: String,
 
 class AssignTripRequestCommand();
 
+class DirectRequestCommand(var tripId: String,var tripRequestId: String,
+                           val userId: String,
+                           val pickup: String,
+                           val destination: String,
+                           val tripDate: LocalDate,
+                           val numberOfPeople: Int,
+                           val luggageSize: LuggageSize);
+
+
+

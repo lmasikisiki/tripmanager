@@ -1,11 +1,12 @@
 package com.khwela.khwelacore.aggregates
 
+import com.khwela.khwelacore.commands.DirectRequestCommand
 import com.khwela.khwelacore.services.RequestService
 import com.khwela.khwelacore.commands.RequestTripCommand
+import com.khwela.khwelacore.events.DirectRequestAssignmentCompletedEvent
 import com.khwela.khwelacore.events.TripRequestedEvent
 import com.khwela.khwelacore.models.TripRequest
-import com.khwela.khwelacore.repositories.TripRepository
-import com.khwela.khwelacore.repositories.TripRequestRepository
+import com.khwela.khwelacore.services.OfferService
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.commandhandling.model.AggregateIdentifier
 import org.axonframework.commandhandling.model.AggregateLifecycle.apply
@@ -18,20 +19,17 @@ class Requests : Serializable {
 
     @AggregateIdentifier
     private var requestId: String? = null
-    private var tripRepository: TripRepository
-    private var tripRequestRepository: TripRequestRepository
     private var requestService: RequestService
-
+    private var offerService: OfferService
 
     @CommandHandler
-    constructor(command: RequestTripCommand, tripRepository: TripRepository, tripRequestRepository: TripRequestRepository, requestService: RequestService) {
-        this.tripRepository = tripRepository
-        this.tripRequestRepository = tripRequestRepository
+    constructor(command: RequestTripCommand, requestService: RequestService, offerService: OfferService) {
         this.requestService = requestService
+        this.offerService = offerService
 
         val request = TripRequest(command.userId, command.pickup,
-                        command.destination, command.tripDate,
-                        command.numberOfPeople)
+                command.destination, command.tripDate,
+                command.numberOfPeople)
         request.id = command.tripRequestId
         requestService.save(request)
 
@@ -40,14 +38,33 @@ class Requests : Serializable {
                 command.tripDate, command.numberOfPeople, command.luggageSize))
     }
 
-    @EventSourcingHandler
-    fun on(event: TripRequestedEvent) {
-         this.requestId = event.tripRequestId
+    @CommandHandler
+    constructor(command: DirectRequestCommand, requestService: RequestService, offerService: OfferService) {
+        this.requestService = requestService
+        this.offerService = offerService
+
+        var tripRequest = TripRequest(command.userId, command.pickup, command.destination, command.tripDate, command.numberOfPeople);
+        tripRequest.id= command.tripRequestId;
+        var tripId = command.tripId;
+        this.requestService.attemptAssignment(tripId, tripRequest)
+
+        apply(DirectRequestAssignmentCompletedEvent(requestId = command.tripRequestId, tripId = tripId))
     }
 
-    constructor(tripRepository: TripRepository, tripRequestRepository: TripRequestRepository, requestService: RequestService) {
-        this.tripRepository = tripRepository
-        this.tripRequestRepository = tripRequestRepository
+    @EventSourcingHandler
+    fun on(event: TripRequestedEvent) {
+        this.requestId = event.tripRequestId
+    }
+
+    @EventSourcingHandler
+    fun on(event: DirectRequestAssignmentCompletedEvent) {
+        this.requestId = event.requestId
+        println("Direct assignment completed.. happy")
+    }
+
+    constructor(requestService: RequestService, offerService: OfferService) {
         this.requestService = requestService
+        this.offerService = offerService
     }
 }
+

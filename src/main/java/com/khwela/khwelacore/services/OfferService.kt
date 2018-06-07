@@ -20,4 +20,8 @@ class OfferService(private  val tripRepository: TripRepository, private val even
                as List<TripRecord>
      }
 
+    fun tripExists(tripId: String): Boolean {
+        return tripRepository.findById(tripId).isPresent
+    }
+
 }

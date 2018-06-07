@@ -11,10 +11,12 @@ class TripRequestedEvent(val tripRequestId: String,
                          val destination: String,
                          val tripDate: LocalDate,
                          val numberOfPeople: Int,
-                         val luggageSize: LuggageSize);
+                         val luggageSize: LuggageSize)
 
-class TripRequestAssignedEvent(val requestId :String, tripId:String);
-class RequestStatusUpatedEvent(val requestId: String, status: TripRequestStatus)
+class TripRequestAssignedEvent(val requestId :String, tripId:String)
+class RequestStatusUpdatedEvent(val requestId: String, status: TripRequestStatus)
+
+class DirectRequestAssignmentCompletedEvent(val requestId: String, val tripId: String)
 
 
 
