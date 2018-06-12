@@ -1,7 +1,9 @@
+
+
 {
-  "offeredBy": "Lizo Masikisiki",
-  "pickup": "Bizana",
-  "destination": "Flagstaff",
+  "offeredBy": "Driver Full Name / Or Id",
+  "pickup": "Point A",
+  "destination": "Point B",
   "numberOfSeats": 5,
   "tripDate": "2017-01-01"
 }

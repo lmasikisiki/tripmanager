@@ -1,7 +1,10 @@
+
+
+
 {
-  "userId": "200903375",
-  "pickup": "Bizana",
-  "destination": "Flagstaff",
+  "userId": "Generated User Id",
+  "pickup": "Point A",
+  "destination": "Point B",
   "numberOfPeople": 1,
   "tripDate": "2017-01-01",
   "luggageSize":"SMALL"
