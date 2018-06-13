@@ -3,22 +3,23 @@ package com.khwela.khwelacore.rest;
 
 import com.google.gson.Gson;
 import com.khwela.khwelacore.commands.OfferTripCommand;
-import com.khwela.khwelacore.commons.QueryBuilder;
 import com.khwela.khwelacore.models.TripRecord;
 import com.khwela.khwelacore.repositories.TripRepository;
 import com.khwela.khwelacore.repositories.TripRequestRepository;
 import com.khwela.khwelacore.services.OfferService;
 import org.axonframework.commandhandling.gateway.CommandGateway;
-import org.omg.CORBA.Any;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Consumes;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@SuppressWarnings("unused")
+ @SuppressWarnings("unused")
 public class HomeController {
 
     private final CommandGateway commandGateway;

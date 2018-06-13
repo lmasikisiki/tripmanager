@@ -17,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
 
 
 @RestController
-@SuppressWarnings("unused")
+ @SuppressWarnings("unused")
 public class TripRequestController {
 
     private final CommandGateway commandGateway;
@@ -48,6 +48,7 @@ public class TripRequestController {
 
     @PostMapping("/trip/request/")
     public CompletableFuture<Object> requestTrip(@RequestBody String tripRequest) {
+        System.out.println(tripRequest+" \n request recieved...");
         RequestTripCommand requestTripCommand = jsonConverter
                 .fromJson(tripRequest, RequestTripCommand.class);
         requestTripCommand.setTripRequestId(UUID.randomUUID().toString());
