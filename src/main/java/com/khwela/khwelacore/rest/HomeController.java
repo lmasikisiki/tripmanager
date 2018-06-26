@@ -36,6 +36,12 @@ public class HomeController {
         this.offerService = offerService;
     }
 
+    @PostMapping("/trip/search")
+    @Consumes("application/json")
+    public @ResponseBody List<TripRecord> availableTrips(@RequestBody Map<String, String> filters) {
+         return this.offerService.getAvailableTrips(filters);
+    }
+
     @PostMapping("/trip")
     @Consumes("application/json")
     public @ResponseBody CompletableFuture<Object> offerTrip(@RequestBody String requestBody) {
@@ -55,9 +61,4 @@ public class HomeController {
         return tripRepository.findById(tripId);
     }
 
-    @PostMapping("/trip/available")
-    @Consumes("application/json")
-    public @ResponseBody List<TripRecord> availableTrips(@RequestBody Map<String, String> filters) {
-         return this.offerService.getAvailableTrips(filters);
-    }
 }

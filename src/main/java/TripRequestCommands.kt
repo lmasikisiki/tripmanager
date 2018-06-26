@@ -10,11 +10,11 @@ class RequestTripCommand(var tripRequestId: String,
                          val destination: String,
                          val tripDate: LocalDate,
                          val numberOfPeople: Int,
-                         val luggageSize: LuggageSize);
+                         val luggageSize: LuggageSize)
 
 
 
-class AssignTripRequestCommand();
+class AssignTripRequestCommand()
 
 class DirectRequestCommand(var tripId: String,var tripRequestId: String,
                            val userId: String,
@@ -22,7 +22,7 @@ class DirectRequestCommand(var tripId: String,var tripRequestId: String,
                            val destination: String,
                            val tripDate: LocalDate,
                            val numberOfPeople: Int,
-                           val luggageSize: LuggageSize);
+                           val luggageSize: LuggageSize)
 
 
 

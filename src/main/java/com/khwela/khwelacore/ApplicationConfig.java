@@ -1,18 +1,16 @@
 package com.khwela.khwelacore;
 
 
+import com.mongodb.MongoClient;
 import org.axonframework.common.jpa.ContainerManagedEntityManagerProvider;
 import org.axonframework.common.jpa.EntityManagerProvider;
 import org.axonframework.eventsourcing.eventstore.EventStorageEngine;
-import org.axonframework.eventsourcing.eventstore.inmemory.InMemoryEventStorageEngine;
-import org.axonframework.eventsourcing.eventstore.jpa.JpaEventStorageEngine;
-import org.axonframework.spring.messaging.unitofwork.SpringTransactionManager;
+import org.axonframework.mongo.DefaultMongoTemplate;
+import org.axonframework.mongo.eventsourcing.eventstore.MongoEventStorageEngine;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
@@ -45,19 +43,47 @@ public class ApplicationConfig {
 
    }
 
-    @Bean(name="transactionManager")
-    public PlatformTransactionManager dbTransactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        return transactionManager;
-    }
+//    @Bean(name="transactionManager")
+//    public PlatformTransactionManager dbTransactionManager() {
+//        JpaTransactionManager transactionManager = new JpaTransactionManager();
+//        return transactionManager;
+//    }
+//
+//    @Bean
+//    public SpringTransactionManager springTransactionManager(){
+//        return new SpringTransactionManager(dbTransactionManager());
+//    }
+//
+//    @Bean
+//    public JpaEventStorageEngine jpaEventStorageEngine(){
+//       return new JpaEventStorageEngine(entityManagerProvider(),springTransactionManager());
+//    }//
 
     @Bean
-    public SpringTransactionManager springTransactionManager(){
-        return new SpringTransactionManager(dbTransactionManager());
+    public EventStorageEngine eventStore(MongoClient client) {
+        return new MongoEventStorageEngine(new DefaultMongoTemplate(client));
     }
 
-    @Bean
-    public JpaEventStorageEngine jpaEventStorageEngine(){
-       return new JpaEventStorageEngine(entityManagerProvider(),springTransactionManager());
-    }
+//    @Bean
+//    public MongoEventStorageEngine eventStorageEngine() {
+//        return new MongoEventStorageEngine(eventStoreMongoTemplate);
+//    }
+//
+//    @Bean
+//    public MongoEventStorageEngine eventStorageEngine() {
+//        return new MongoEventStorageEngine(mongoTemplate());
+//    }
+
 }
+
+//db.createUser(
+//        {
+//        user: "admin",
+//        pwd: "lizo90",
+//        roles: [
+//        { role: "userAdminAnyDatabase", db: "admin" },
+//        { role: "readWriteAnyDatabase", db: "admin" },
+//        { role: "dbAdminAnyDatabase", db: "admin" },
+//        { role: "clusterAdmin", db: "admin" }
+//        ]
+//        })

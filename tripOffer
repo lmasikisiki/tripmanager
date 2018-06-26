@@ -1,9 +1,9 @@
 
 
 {
-  "offeredBy": "Driver Full Name / Or Id",
-  "pickup": "Point A",
-  "destination": "Point B",
+  "offeredBy": "Driver Name",
+  "pickup": "Durban",
+  "destination": "East London",
   "numberOfSeats": 5,
   "tripDate": "2017-01-01"
 }
